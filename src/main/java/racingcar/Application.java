@@ -1,41 +1,50 @@
 package racingcar;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Application {
     public static void main(String[] args) {
-        Ready4Racing racing = new Ready4Racing();
+        ReadyForRacing racing = new ReadyForRacing();
 
         List<Car> racerList = racing.getRacerList();
+        List<Winner> winners = new ArrayList<>();
 
         int attempts = racing.getNumberOfAttempts();
 
-        System.out.println("\n" + Info.racingResult);
+        System.out.println("\n" + Info.RACING_RESULT);
 
-        int maxPos = 0;
-        String winner = "";
+        int maxPosition = 0;
 
         for (int i = 0; i < attempts; i++) {
             for (Car car : racerList) {
                 int pos = car.moveForward();
                 String racer = car.getName();
+                Winner winner = null;
 
-                if (maxPos == pos) {
-                    if (!winner.contains(racer)) {
-                        winner += ", " + racer;
+                if (maxPosition == pos) {
+
+                    for (Winner single : winners) {
+                        if (!single.getWinner().equals(racer)) {
+                            winner = new Winner(racer);
+                            winners.add(winner);
+                        }
                     }
-                } else if (maxPos < pos) {
-                    maxPos = pos;
-                    winner = racer;
+
+                    if(winners.size() == 0) {
+                        winners.add(new Winner(racer));
+                    }
+                } else if (maxPosition < pos) {
+                    maxPosition = pos;
+
+                    winners.clear();
+                    winner = new Winner(racer);
+                    winners.add(winner);
                 }
             }
             System.out.println();
         }
 
-        if (winner.startsWith(", ")) {
-            winner = winner.substring(0, 2);
-        }
-
-        System.out.println(Info.finalWinner + winner);
+        System.out.println(Info.FINAL_WINNER + racing.arrange(winners));
     }
 }

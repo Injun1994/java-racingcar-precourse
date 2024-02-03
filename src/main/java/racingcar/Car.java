@@ -9,12 +9,8 @@ public class Car {
     }
 
     // 추가 기능 구현
-    protected String getName() {
-        return name;
-    }
-
     protected int moveForward() {
-        Ready4Racing racing = new Ready4Racing();
+        ReadyForRacing racing = new ReadyForRacing();
         int randomNumber = racing.getNumber();
 
         if (randomNumber >= 4) {
@@ -33,4 +29,7 @@ public class Car {
         return position;
     }
 
+    protected String getName() {
+        return name;
+    }
 }
