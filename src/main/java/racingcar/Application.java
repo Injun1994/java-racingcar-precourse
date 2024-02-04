@@ -4,47 +4,58 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Application {
-    public static void main(String[] args) {
-        ReadyForRacing racing = new ReadyForRacing();
 
-        List<Car> racerList = racing.getRacerList();
-        List<Winner> winners = new ArrayList<>();
+    public List<Winner> winners;
+
+
+    public static void main(String[] args) {
+
+        ReadyForRacing racing = new ReadyForRacing(true);
+
+        while(racing.getRacerList().size() == 0) {
+            System.out.println(Info.ERROR_MSG);
+            racing = new ReadyForRacing(true);
+        }
 
         int attempts = racing.getNumberOfAttempts();
 
+        Application application = new Application();
+
+        application.winners = new ArrayList<>();
+
         System.out.println("\n" + Info.RACING_RESULT);
 
-        int maxPosition = 0;
 
         for (int i = 0; i < attempts; i++) {
-            for (Car car : racerList) {
-                int pos = car.moveForward();
-                String racer = car.getName();
-                Winner winner = null;
-
-                if (maxPosition == pos) {
-
-                    for (Winner single : winners) {
-                        if (!single.getWinner().equals(racer)) {
-                            winner = new Winner(racer);
-                            winners.add(winner);
-                        }
-                    }
-
-                    if(winners.size() == 0) {
-                        winners.add(new Winner(racer));
-                    }
-                } else if (maxPosition < pos) {
-                    maxPosition = pos;
-
-                    winners.clear();
-                    winner = new Winner(racer);
-                    winners.add(winner);
-                }
-            }
+            application.playOneSet(racing.getRacerList());
             System.out.println();
         }
 
-        System.out.println(Info.FINAL_WINNER + racing.arrange(winners));
+        System.out.println(Info.FINAL_WINNER + racing.lineList(application.winners));
+    }
+
+    private void playOneSet(List<Car> racerList) {
+        int maxPosition = 0;
+
+        for (Car car : racerList) {
+            int pos = car.moveForward();
+            String racer = car.getName();
+
+            if (maxPosition == pos) {
+                Winner winner = new Winner();
+                winner.valueOf(racer);
+                winners.add(winner);
+            } else if (maxPosition < pos) {
+                maxPosition = pos;
+
+                if(winners != null) {
+                    winners.clear();
+                }
+
+                Winner winner = new Winner();
+                winner.valueOf(racer);
+                winners.add(winner);
+            }
+        }
     }
 }

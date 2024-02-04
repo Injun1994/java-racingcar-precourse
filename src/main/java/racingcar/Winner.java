@@ -4,11 +4,8 @@ public class Winner {
 
     private static String winner;
 
-    public Winner(String winner) {
-        this.winner = winner;
-    }
-
-    protected String getWinner() {
+    public String valueOf(String racer) {
+        winner = racer;
         return winner;
     }
 }
