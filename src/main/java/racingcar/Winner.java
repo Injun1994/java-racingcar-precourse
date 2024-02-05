@@ -2,10 +2,12 @@ package racingcar;
 
 public class Winner {
 
-    private static String winner;
+    private String winner;
 
     public String valueOf(String racer) {
-        winner = racer;
+        if (!"".equals(racer)) {
+            winner = racer;
+        }
         return winner;
     }
 }

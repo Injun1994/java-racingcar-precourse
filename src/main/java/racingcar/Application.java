@@ -10,18 +10,17 @@ public class Application {
 
     public static void main(String[] args) {
 
+        Application application = new Application();
         ReadyForRacing racing = new ReadyForRacing(true);
+        Attempt attempt = new Attempt();
+        application.winners = new ArrayList<>();
 
         while(racing.getRacerList().size() == 0) {
             System.out.println(Info.ERROR_MSG);
             racing = new ReadyForRacing(true);
         }
 
-        int attempts = racing.getNumberOfAttempts();
-
-        Application application = new Application();
-
-        application.winners = new ArrayList<>();
+        int attempts = attempt.getNumberOfAttempts();
 
         System.out.println("\n" + Info.RACING_RESULT);
 
