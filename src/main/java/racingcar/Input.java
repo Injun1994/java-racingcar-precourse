@@ -1,25 +1,22 @@
 package racingcar;
 
 import org.junit.platform.commons.util.StringUtils;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import static camp.nextstep.edu.missionutils.Console.readLine;
 
-public class ReadyForRacing {
-
+public class Input {
     private final List<Car> racerList;
 
-
-    public ReadyForRacing(boolean flag) {
+    public Input(boolean flag) {
         racerList = new ArrayList<>();
 
         if (!flag) {
             return;
         }
 
-        System.out.println(Info.CAR_NAME_INPUT);
+        Info info = new Info();
+        info.outputCarNameInput();
         String racerLine = getInput();
 
         try {
@@ -31,7 +28,7 @@ public class ReadyForRacing {
                 }
             }
         } catch (IllegalArgumentException illegalArgumentException) {
-            System.out.println(Info.ERROR_MSG);
+            info.outputErrorMsg();
         }
     }
 
@@ -48,18 +45,5 @@ public class ReadyForRacing {
 
     protected List<Car> getRacerList() {
         return racerList;
-    }
-
-    protected String lineList(List<Winner> winners) {
-        String line = "";
-        String join = ", ";
-
-        for (Winner winner : winners) {
-            line += winner.valueOf("") + join;
-        }
-        if (line.lastIndexOf(join) != -1) {
-            line = line.substring(0, line.length() - join.length());
-        }
-        return line;
     }
 }

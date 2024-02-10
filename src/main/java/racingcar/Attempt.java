@@ -1,14 +1,15 @@
 package racingcar;
 
 public class Attempt {
-
     protected int getNumberOfAttempts() {
-        System.out.println(Info.NUMBER_OF_ATTEMPTS);
+        Info info = new Info();
+        info.outputNumberOfAttempts();
+
         int number = 0;
         try {
-            number = Integer.parseInt(new ReadyForRacing(false).getInput());
+            number = Integer.parseInt(new Input(false).getInput());
         } catch (IllegalArgumentException illegalArgumentException) {
-            System.out.println(Info.ERROR_MSG_FOR_NUMBER);
+            info.outputErrorMsgForNumber();
             number = getNumberOfAttempts();
         }
         return number;

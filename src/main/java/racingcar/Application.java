@@ -4,33 +4,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Application {
-
-    public List<Winner> winners;
-
+    private List<Winner> winners;
 
     public static void main(String[] args) {
-
         Application application = new Application();
-        ReadyForRacing racing = new ReadyForRacing(true);
+        Input input = new Input(true);
         Attempt attempt = new Attempt();
         application.winners = new ArrayList<>();
+        Info info = new Info();
 
-        while(racing.getRacerList().size() == 0) {
-            System.out.println(Info.ERROR_MSG);
-            racing = new ReadyForRacing(true);
+        while(input.getRacerList().size() == 0) {
+            info.outputErrorMsg();
+            input = new Input(true);
         }
 
         int attempts = attempt.getNumberOfAttempts();
 
-        System.out.println("\n" + Info.RACING_RESULT);
+        System.out.print("\n");
+        info.outputRacingResult();
 
 
         for (int i = 0; i < attempts; i++) {
-            application.playOneSet(racing.getRacerList());
+            application.playOneSet(input.getRacerList());
             System.out.println();
         }
 
-        System.out.println(Info.FINAL_WINNER + racing.lineList(application.winners));
+        info.outputFinalWinner();
+        System.out.println(info.lineList(application.winners));
     }
 
     private void playOneSet(List<Car> racerList) {

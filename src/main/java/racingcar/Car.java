@@ -1,7 +1,5 @@
 package racingcar;
 
-import static camp.nextstep.edu.missionutils.Randoms.pickNumberInRange;
-
 public class Car {
     private final String name;
     private int position = 0;
@@ -12,7 +10,8 @@ public class Car {
 
     // 추가 기능 구현
     protected int moveForward() {
-        if (getNumber() >= 4) {
+        Info info = new Info();
+        if (info.getNumber() >= 4) {
             position++;
         }
 
@@ -26,10 +25,6 @@ public class Car {
         System.out.println();
 
         return position;
-    }
-
-    protected int getNumber() {
-        return pickNumberInRange(0, 9);
     }
 
     protected String getName() {
