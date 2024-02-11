@@ -1,12 +1,17 @@
 package racingcar;
 
 public class Winner {
-    protected String winner;
+    private final String winner;
 
-    public String valueOf(String racer) {
-        if (!"".equals(racer)) {
-            winner = racer;
-        }
+    private Winner(String winner) {
+        this.winner = winner;
+    }
+
+    public static Winner valueOf(String racer) {
+        return new Winner(racer);
+    }
+
+    public String getWinner() {
         return winner;
     }
 }

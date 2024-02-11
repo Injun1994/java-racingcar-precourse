@@ -8,14 +8,14 @@ public class Application {
 
     public static void main(String[] args) {
         Application application = new Application();
-        Input input = new Input(true);
+        Input input = new Input(new ArrayList<>());
         Attempt attempt = new Attempt();
         application.winners = new ArrayList<>();
         Info info = new Info();
 
         while(input.getRacerList().size() == 0) {
             info.outputErrorMsg();
-            input = new Input(true);
+            input = new Input(new ArrayList<>());
         }
 
         int attempts = attempt.getNumberOfAttempts();
@@ -41,9 +41,7 @@ public class Application {
             String racer = car.getName();
 
             if (maxPosition == pos) {
-                Winner winner = new Winner();
-                winner.valueOf(racer);
-                winners.add(winner);
+                winners.add(Winner.valueOf(racer));
             } else if (maxPosition < pos) {
                 maxPosition = pos;
 
@@ -51,9 +49,7 @@ public class Application {
                     winners.clear();
                 }
 
-                Winner winner = new Winner();
-                winner.valueOf(racer);
-                winners.add(winner);
+                winners.add(Winner.valueOf(racer));
             }
         }
     }

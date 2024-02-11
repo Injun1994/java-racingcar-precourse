@@ -38,7 +38,7 @@ public class Info {
     }
 
     protected String lineList(List<Winner> winners) {
-        return winners.stream().map(w -> w.valueOf("")).collect(Collectors.joining(", "));
+        return winners.stream().map(w -> w.getWinner()).collect(Collectors.joining(", "));
     }
 
     protected int getNumber() {

@@ -1,17 +1,14 @@
 package racingcar;
 
 import org.junit.platform.commons.util.StringUtils;
-import java.util.ArrayList;
 import java.util.List;
 import static camp.nextstep.edu.missionutils.Console.readLine;
 
 public class Input {
-    private final List<Car> racerList;
+    private List<Car> racerList;
 
-    public Input(boolean flag) {
-        racerList = new ArrayList<>();
-
-        if (!flag) {
+    public Input(List<Car> racerList) {
+        if (racerList == null) {
             return;
         }
 
@@ -30,6 +27,7 @@ public class Input {
         } catch (IllegalArgumentException illegalArgumentException) {
             info.outputErrorMsg();
         }
+        this.racerList = racerList;
     }
 
     protected String getInput() {

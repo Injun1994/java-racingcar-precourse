@@ -7,7 +7,7 @@ public class Attempt {
 
         int number = 0;
         try {
-            number = Integer.parseInt(new Input(false).getInput());
+            number = Integer.parseInt(new Input(null).getInput());
         } catch (IllegalArgumentException illegalArgumentException) {
             info.outputErrorMsgForNumber();
             number = getNumberOfAttempts();
